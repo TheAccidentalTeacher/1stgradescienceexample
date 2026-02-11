@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 240, 249, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Kid-friendly, large text for Bobby */
+.lesson-content {
+  @apply text-2xl leading-relaxed;
+}
+
+.lesson-title {
+  @apply text-4xl md:text-5xl font-bold mb-4;
+}
+
+.scripture-text {
+  @apply text-xl italic text-blue-800 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500;
+}
+
+.activity-card {
+  @apply bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-primary transition-all;
+}
+
+/* Fun animations for Bobby */
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bounce-on-hover:hover {
+  animation: bounce-gentle 0.5s ease-in-out;
+}
+
+/* Large clickable areas for easy navigation */
+.nav-button {
+  @apply min-h-[80px] text-2xl font-bold rounded-xl transition-all transform hover:scale-105;
+}
+
+/* High contrast for readability */
+.high-contrast {
+  @apply text-gray-900 font-semibold;
+}
+
+/* Image containers */
+.lesson-image {
+  @apply rounded-lg shadow-md border-4 border-gray-200;
+}
