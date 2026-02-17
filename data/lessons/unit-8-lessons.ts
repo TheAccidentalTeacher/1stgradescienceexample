@@ -10,6 +10,7 @@ export const unit8Lessons: Lesson[] = [
     estimatedTime: '45-60 minutes',
     icon: '🪨',
     heroImage: 'Different types of colorful rocks and rich dark soil with a small plant growing',
+    heroImageStyle: 'cartoon',
     scripture: {
       reference: 'Genesis 1:9-10',
       text: 'And God said, "Let the waters under the heavens be gathered together into one place, and let the dry land appear." And it was so. God called the dry land Earth, and the waters that were gathered together he called Seas. And God saw that it was good.',

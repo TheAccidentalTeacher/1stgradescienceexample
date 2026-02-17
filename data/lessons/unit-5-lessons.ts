@@ -10,6 +10,7 @@ export const unit5Lessons: Lesson[] = [
     estimatedTime: '45-60 minutes',
     icon: '🌱',
     heroImage: 'A sequence showing a seed sprouting into a small plant with roots underground and a sprout above ground',
+    heroImageStyle: 'cartoon',
     scripture: {
       reference: 'Mark 4:31-32',
       text: 'It is like a grain of mustard seed, which, when sown on the ground, is the smallest of all the seeds on earth, yet when it is sown it grows up and becomes larger than all the garden plants and puts out large branches.',

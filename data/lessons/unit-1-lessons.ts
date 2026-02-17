@@ -177,7 +177,8 @@ export const unit1Lessons: Lesson[] = [
     title: "Day 2: Sky and Water",
     subtitle: "God Makes the Sky!",
     icon: "☁️",
-    heroImage: "/images/unit1/day2-sky.jpg",
+    heroImage: "Beautiful bright blue sky with fluffy white clouds, water below with gentle waves and mist rising up into the sky, watercolor children's Bible style, peaceful and serene",
+    heroImageStyle: "watercolor",
     scripture: {
       reference: "Genesis 1:6-8 (ESV)",
       text: "And God said, 'Let there be an expanse in the midst of the waters, and let it separate the waters from the waters.' And God made the expanse and separated the waters that were under the expanse from the waters that were above the expanse. And it was so. And God called the expanse Heaven. And there was evening and there was morning, the second day."
@@ -325,7 +326,8 @@ export const unit1Lessons: Lesson[] = [
     title: "Day 3: Land and Plants",
     subtitle: "God Makes Dry Ground and Growing Things!",
     icon: "🌱",
-    heroImage: "/images/unit1/day3-plants.jpg",
+    heroImage: "Lush green landscape with colorful flowers, tall trees, grass, and plants sprouting from rich brown earth, bright and vibrant watercolor children's Bible illustration, joyful creation scene",
+    heroImageStyle: "watercolor",
     scripture: {
       reference: "Genesis 1:9-13 (ESV)",
       text: "And God said, 'Let the waters under the heavens be gathered together into one place, and let the dry land appear.' And it was so. God called the dry land Earth, and the waters that were gathered together he called Seas. And God saw that it was good. And God said, 'Let the earth sprout vegetation, plants yielding seed, and fruit trees bearing fruit in which is their seed, each according to its kind, on the earth.' And it was so."
@@ -489,7 +491,8 @@ export const unit1Lessons: Lesson[] = [
     title: "Day 4: Sun, Moon, and Stars",
     subtitle: "God Makes Lights in the Sky!",
     icon: "☀️",
-    heroImage: "/images/unit1/day4-sun-moon-stars.jpg",
+    heroImage: "Bright golden sun shining in blue sky, silver moon on one side, sparkling stars scattered across the heavens, split day and night scene, watercolor children's Bible illustration, majestic and wonderful",
+    heroImageStyle: "watercolor",
     scripture: {
       reference: "Genesis 1:14-19 (ESV)",
       text: "And God said, 'Let there be lights in the expanse of the heavens to separate the day from the night. And let them be for signs and for seasons, and for days and years, and let them be lights in the expanse of the heavens to give light upon the earth.' And it was so. And God made the two great lights—the greater light to rule the day and the lesser light to rule the night—and the stars. And God set them in the expanse of the heavens to give light on the earth."
@@ -651,7 +654,8 @@ export const unit1Lessons: Lesson[] = [
     title: "Day 5: Sea Creatures and Birds",
     subtitle: "God Fills the Water and Sky with Life!",
     icon: "🐟",
-    heroImage: "/images/unit1/day5-fish-birds.jpg",
+    heroImage: "Colorful fish swimming in blue ocean waters with dolphins and whales, beautiful birds flying in the sky above with spread wings, split scene showing water below and sky above, watercolor children's Bible illustration, full of life and movement",
+    heroImageStyle: "watercolor",
     scripture: {
       reference: "Genesis 1:20-23 (ESV)",
       text: "And God said, 'Let the waters swarm with swarms of living creatures, and let birds fly above the earth across the expanse of the heavens.' So God created the great sea creatures and every living creature that moves, with which the waters swarm, according to their kinds, and every winged bird according to its kind. And God saw that it was good. And God blessed them, saying, 'Be fruitful and multiply and fill the waters in the seas, and let birds multiply on the earth.'"
@@ -816,7 +820,8 @@ export const unit1Lessons: Lesson[] = [
     title: "Day 6: Land Animals and People",
     subtitle: "God Makes Animals (Even Dinosaurs!) and Humans!",
     icon: "🦕",
-    heroImage: "/images/unit1/day6-animals-people.jpg",
+    heroImage: "Beautiful Garden of Eden with friendly dinosaurs, elephants, lions, giraffes, and other animals peacefully together, Adam and Eve joyfully in the center surrounded by creation, watercolor children's Bible illustration, peaceful paradise scene",
+    heroImageStyle: "watercolor",
     scripture: {
       reference: "Genesis 1:24-31 (ESV)",
       text: "And God said, 'Let the earth bring forth living creatures according to their kinds—livestock and creeping things and beasts of the earth according to their kinds.' And it was so. And God made the beasts of the earth according to their kinds and the livestock according to their kinds, and everything that creeps on the ground according to its kind. And God saw that it was good. Then God said, 'Let us make man in our image, after our likeness.' So God created man in his own image, in the image of God he created him; male and female he created them."
@@ -975,7 +980,8 @@ export const unit1Lessons: Lesson[] = [
     title: "Day 7: Rest and Reflection",
     subtitle: "God Rested and Called It All VERY Good!",
     icon: "😌",
-    heroImage: "/images/unit1/day7-rest.jpg",
+    heroImage: "Peaceful sunset over perfect creation, all of God's works resting in harmony - animals, plants, sky, water, and land together, golden sunset light, watercolor children's Bible illustration, serene and complete",
+    heroImageStyle: "watercolor",
     scripture: {
       reference: "Genesis 2:1-3 (ESV)",
       text: "Thus the heavens and the earth were finished, and all the host of them. And on the seventh day God finished his work that he had done, and he rested on the seventh day from all his work that he had done. So God blessed the seventh day and made it holy, because on it God rested from all his work that he had done in creation."

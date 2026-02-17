@@ -12,6 +12,7 @@ interface YouTubeVideoProps {
 
 export default function YouTubeVideo({ videoId, title, description }: YouTubeVideoProps) {
   const [isPlaying, setIsPlaying] = useState(false)
+  const [thumbnailError, setThumbnailError] = useState(false)
   
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
   
@@ -23,11 +24,21 @@ export default function YouTubeVideo({ videoId, title, description }: YouTubeVid
             onClick={() => setIsPlaying(true)}
             className="w-full h-full relative group cursor-pointer"
           >
-            <img 
-              src={thumbnailUrl} 
-              alt={title}
-              className="w-full h-full object-cover"
-            />
+            {!thumbnailError ? (
+              <img 
+                src={thumbnailUrl} 
+                alt={title}
+                className="w-full h-full object-cover"
+                onError={() => setThumbnailError(true)}
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <Play className="w-24 h-24 mx-auto mb-4 opacity-75" />
+                  <p className="text-2xl font-bold">Click to Play Video</p>
+                </div>
+              </div>
+            )}
             <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-20 transition-all flex items-center justify-center">
               <div className="bg-red-600 rounded-full p-8 group-hover:scale-110 transition-transform">
                 <Play className="w-16 h-16 text-white fill-white" />

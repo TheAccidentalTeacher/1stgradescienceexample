@@ -10,6 +10,7 @@ export const unit7Lessons: Lesson[] = [
     estimatedTime: '45-60 minutes',
     icon: '👁️',
     heroImage: 'A happy child experiencing all five senses - touching, seeing, hearing, tasting, smelling',
+    heroImageStyle: 'cartoon',
     scripture: {
       reference: 'Psalm 139:14',
       text: 'I praise you, for I am fearfully and wonderfully made. Wonderful are your works; my soul knows it very well.',

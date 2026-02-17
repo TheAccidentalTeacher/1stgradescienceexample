@@ -10,6 +10,7 @@ export const unit2Lessons: Lesson[] = [
     estimatedTime: '45-60 minutes',
     icon: '🦕',
     heroImage: 'A friendly T-Rex and Brachiosaurus standing with a boy in a garden setting',
+    heroImageStyle: 'cartoon',
     scripture: {
       reference: 'Genesis 1:24-25',
       text: 'And God said, "Let the earth bring forth living creatures according to their kinds—livestock and creeping things and beasts of the earth according to their kinds." And it was so. And God made the beasts of the earth according to their kinds and the livestock according to their kinds, and everything that creeps on the ground according to its kind. And God saw that it was good.',

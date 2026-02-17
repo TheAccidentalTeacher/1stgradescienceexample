@@ -10,6 +10,7 @@ export const unit3Lessons: Lesson[] = [
     estimatedTime: '45-60 minutes',
     icon: '🚜',
     heroImage: 'A bright yellow excavator and dump truck working together on a construction site',
+    heroImageStyle: 'cartoon',
     scripture: {
       reference: 'Psalm 104:24',
       text: 'O LORD, how manifold are your works! In wisdom have you made them all; the earth is full of your creatures.',

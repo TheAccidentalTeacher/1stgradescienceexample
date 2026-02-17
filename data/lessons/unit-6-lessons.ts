@@ -10,6 +10,7 @@ export const unit6Lessons: Lesson[] = [
     estimatedTime: '45-60 minutes',
     icon: '☀️',
     heroImage: 'A split scene showing bright sun during day and moon with stars at night over a landscape',
+    heroImageStyle: 'cartoon',
     scripture: {
       reference: 'Genesis 1:14-15',
       text: 'And God said, "Let there be lights in the expanse of the heavens to separate the day from the night. And let them be for signs and for seasons, and for days and years, and let them be lights in the expanse of the heavens to give light upon the earth." And it was so.',

@@ -10,6 +10,7 @@ export const unit4Lessons: Lesson[] = [
     estimatedTime: '45-60 minutes',
     icon: '🐛',
     heroImage: 'A close-up view of a friendly-looking ladybug on a green leaf with dewdrops, colorful and gentle',
+    heroImageStyle: 'cartoon',
     scripture: {
       reference: 'Proverbs 6:6',
       text: 'Go to the ant, O sluggard; consider her ways, and be wise.',
