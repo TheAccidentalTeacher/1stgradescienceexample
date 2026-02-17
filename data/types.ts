@@ -20,6 +20,7 @@ export interface Activity {
   steps: string[]
   whatYoullDiscover: string
   imagePrompt?: string // For AI image generation
+  imageStyle?: 'line-art' | 'watercolor' | 'cartoon' | 'realistic'
 }
 
 export interface ReviewQuestion {
@@ -30,10 +31,18 @@ export interface ReviewQuestion {
   emoji?: string
 }
 
+export interface VideoResource {
+  videoId: string // YouTube video ID
+  title: string
+  description: string
+  duration?: string
+}
+
 export interface ContentBlock {
   type: 'explanation' | 'key-point' | 'fun-fact' | 'bible-connection'
   text: string
   emoji?: string
+  imagePrompt?: string // Optional image for this content block
 }
 
 export interface Lesson {
@@ -43,12 +52,14 @@ export interface Lesson {
   title: string
   subtitle: string
   icon: string
-  heroImage?: string // URL or path
+  heroImage?: string // URL or path or AI prompt
+  heroImageStyle?: 'line-art' | 'watercolor' | 'cartoon' | 'realistic'
   scripture: Scripture
   objectives: string[]
   vocabulary: Vocabulary[]
   content: ContentBlock[]
   activities: Activity[]
+  videos?: VideoResource[] // YouTube educational videos
   reviewQuestions: ReviewQuestion[]
   prayerPrompt: string
   oklahomaStandards: string[]

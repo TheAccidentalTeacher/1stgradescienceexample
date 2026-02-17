@@ -9,10 +9,12 @@ export const unit1Lessons: Lesson[] = [
     title: "Day 1: Light and Darkness",
     subtitle: "God Makes Light!",
     icon: "💡",
-    heroImage: "/images/unit1/day1-light.jpg",
+    heroImage: "Beautiful radiant golden light bursting through darkness, with 'Let there be light' text, watercolor children's Bible style, hope and creation",
+    heroImageStyle: "watercolor",
     scripture: {
       reference: "Genesis 1:3-5 (ESV)",
-      text: "And God said, 'Let there be light,' and there was light. God saw that the light was good, and he separated the light from the darkness. God called the light 'day,' and the darkness he called 'night.' And there was evening, and there was morning—the first day."
+      text: "And God said, 'Let there be light,' and there was light. God saw that the light was good, and he separated the light from the darkness. God called the light 'day,' and the darkness he called 'night.' And there was evening, and there was morning—the first day.",
+      version: "ESV"
     },
     objectives: [
       "Learn that God created light on Day 1",
@@ -115,6 +117,20 @@ export const unit1Lessons: Lesson[] = [
         ],
         whatYoullDiscover: "We use SO MUCH light every single day! We have lights everywhere to help us see. God knew how important light would be, so He made it on the VERY FIRST day of creation. Imagine if God had never made light - everything would always be dark and we couldn't see anything at all!",
         imagePrompt: "Child counting lights around the house with a notepad, bright cheerful illustration"
+      }
+    ],
+    videos: [
+      {
+        videoId: "AJVCTrGq5CY",
+        title: "Creation Day 1 - Let There Be Light!",
+        description: "Watch this fun video about how God created light on the very first day!",
+        duration: "3:45"
+      },
+      {
+        videoId: "nkcKaNqfykg",
+        title: "Light and Dark Science for Kids",
+        description: "Learn about light and shadows with fun experiments!",
+        duration: "5:12"
       }
     ],
     reviewQuestions: [

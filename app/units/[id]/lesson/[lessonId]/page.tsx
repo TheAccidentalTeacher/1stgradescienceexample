@@ -9,6 +9,8 @@ import { unit6Lessons } from '@/data/lessons/unit-6-lessons'
 import { unit7Lessons } from '@/data/lessons/unit-7-lessons'
 import { unit8Lessons } from '@/data/lessons/unit-8-lessons'
 import { Lesson } from '@/data/types'
+import AIImage from '@/components/AIImage'
+import YouTubeVideo from '@/components/YouTubeVideo'
 
 // Generate static params for all lessons
 export function generateStaticParams() {
@@ -81,7 +83,7 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
           <div className="flex-grow space-y-3">
             <div className="flex items-center gap-4">
               <span className="bg-white text-purple-600 px-4 py-2 rounded-full text-xl font-bold">
-                Lesson {lesson.id}
+                Lesson {lessonIdNum}
               </span>
               <div className="flex items-center gap-2 text-white/90">
                 <Clock className="w-6 h-6" />
@@ -93,6 +95,16 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
           </div>
         </div>
       </div>
+
+      {/* AI-Generated Hero Image */}
+      {lesson.heroImage && (
+        <AIImage 
+          prompt={lesson.heroImage}
+          style={lesson.heroImageStyle || 'watercolor'}
+          alt={`${lesson.title} - ${lesson.subtitle}`}
+          className="w-full h-96 object-cover"
+        />
+      )}
 
       {/* Scripture Section */}
       <div className="scripture-text">
@@ -225,9 +237,39 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
               </h4>
               <p className="text-xl text-gray-800 leading-relaxed">{activity.whatYoullDiscover}</p>
             </div>
+
+            {/* AI-Generated Activity Image */}
+            {activity.imagePrompt && (
+              <div className="mt-6">
+                <AIImage 
+                  prompt={activity.imagePrompt}
+                  style={activity.imageStyle || 'cartoon'}
+                  alt={activity.title}
+                  className="w-full h-80 object-cover"
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
+
+      {/* Educational Videos */}
+      {lesson.videos && lesson.videos.length > 0 && (
+        <div className="space-y-6">
+          <h2 className="text-4xl font-bold text-gray-900">📺 Watch & Learn!</h2>
+          <p className="text-xl text-gray-700">Check out these fun videos to learn even more!</p>
+          <div className="grid md:grid-cols-2 gap-6">
+            {lesson.videos.map((video, index) => (
+              <YouTubeVideo
+                key={index}
+                videoId={video.videoId}
+                title={video.title}
+                description={video.description}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Review Questions - Interactive! */}
       <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 border-2 border-purple-300">
