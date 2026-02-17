@@ -1,5 +1,26 @@
 import Link from 'next/link'
 import { ArrowLeft, Book, Clock, Target } from 'lucide-react'
+import { unit1Lessons } from '@/data/lessons/unit-1-lessons'
+import { unit2Lessons } from '@/data/lessons/unit-2-lessons'
+import { unit3Lessons } from '@/data/lessons/unit-3-lessons'
+import { unit4Lessons } from '@/data/lessons/unit-4-lessons'
+import { unit5Lessons } from '@/data/lessons/unit-5-lessons'
+import { unit6Lessons } from '@/data/lessons/unit-6-lessons'
+import { unit7Lessons } from '@/data/lessons/unit-7-lessons'
+import { unit8Lessons } from '@/data/lessons/unit-8-lessons'
+import { Lesson } from '@/data/types'
+
+// Map unit IDs to their lessons
+const unitLessons: { [key: string]: Lesson[] } = {
+  '1': unit1Lessons,
+  '2': unit2Lessons,
+  '3': unit3Lessons,
+  '4': unit4Lessons,
+  '5': unit5Lessons,
+  '6': unit6Lessons,
+  '7': unit7Lessons,
+  '8': unit8Lessons,
+}
 
 // Generate static params for all unit IDs
 export function generateStaticParams() {
@@ -143,6 +164,7 @@ const unitData: Record<string, any> = {
 export default async function UnitPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const unit = unitData[id]
+  const lessons = unitLessons[id] || []
 
   if (!unit) {
     return (
@@ -197,40 +219,61 @@ export default async function UnitPage({ params }: { params: Promise<{ id: strin
       {/* Lessons */}
       <div>
         <h2 className="text-4xl font-bold mb-6 text-gray-900">Lessons 📖</h2>
-        <div className="space-y-6">
-          {unit.lessons.map((lesson: any, index: number) => (
-            <Link 
-              key={index} 
-              href={`/units/${unit.id}/lesson/${lesson.day || index + 1}`}
-              className="activity-card hover:border-primary block transition-all hover:scale-102 hover:shadow-xl cursor-pointer"
-            >
-              <div className="flex items-start gap-4">
-                <div className="bg-gradient-to-br from-blue-500 to-green-500 text-white text-3xl font-bold w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0">
-                  {lesson.day || index + 1}
-                </div>
-                <div className="flex-grow">
-                  <h3 className="text-3xl font-bold text-gray-900 mb-2">{lesson.title}</h3>
-                  <p className="text-xl text-gray-700 mb-4">{lesson.description}</p>
-                  <div className="bg-blue-50 rounded-lg p-4">
-                    <p className="text-lg font-bold text-blue-900 mb-2">Activities:</p>
-                    <ul className="space-y-2">
-                      {lesson.activities.map((activity: string, actIndex: number) => (
-                        <li key={actIndex} className="flex items-center gap-2 text-lg text-blue-800">
-                          <span className="text-2xl">🎨</span>
-                          {activity}
-                        </li>
-                      ))}
-                    </ul>
+        {lessons.length > 0 ? (
+          <div className="space-y-6">
+            {lessons.map((lesson, index) => (
+              <Link 
+                key={lesson.id} 
+                href={`/units/${id}/lesson/${lesson.lessonNumber}`}
+                className="activity-card hover:border-primary block transition-all hover:scale-102 hover:shadow-xl cursor-pointer"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="bg-gradient-to-br from-blue-500 to-green-500 text-white text-3xl font-bold w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0">
+                    {lesson.lessonNumber}
                   </div>
-                  <div className="mt-4 flex items-center gap-2 text-blue-600 font-bold text-xl">
-                    <span>Start Lesson</span>
-                    <span className="text-2xl">→</span>
+                  <div className="flex-grow">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-4xl">{lesson.icon}</span>
+                      <h3 className="text-3xl font-bold text-gray-900">{lesson.title}</h3>
+                    </div>
+                    <p className="text-xl text-gray-700 mb-3">{lesson.subtitle}</p>
+                    <div className="flex items-center gap-2 text-lg text-gray-600 mb-4">
+                      <Clock className="w-5 h-5" />
+                      <span>{lesson.estimatedTime}</span>
+                    </div>
+                    
+                    <div className="bg-blue-50 rounded-lg p-4 mb-3">
+                      <p className="text-lg font-bold text-blue-900 mb-2">What You'll Do:</p>
+                      <ul className="space-y-2">
+                        {lesson.activities.slice(0, 3).map((activity, actIndex) => (
+                          <li key={actIndex} className="flex items-center gap-2 text-lg text-blue-800">
+                            <span className="text-2xl">🎨</span>
+                            {activity.title}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-purple-50 rounded-lg p-3 mb-3">
+                      <p className="text-lg font-bold text-purple-900 mb-1">📖 Scripture:</p>
+                      <p className="text-md text-purple-800">{lesson.scripture.reference}</p>
+                    </div>
+                    
+                    <div className="mt-4 flex items-center gap-2 text-blue-600 font-bold text-xl">
+                      <span>Start Lesson</span>
+                      <span className="text-2xl">→</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-yellow-50 border-2 border-yellow-300 rounded-2xl p-8 text-center">
+            <p className="text-2xl text-yellow-800 font-bold mb-2">📚 Lessons Coming Soon!</p>
+            <p className="text-xl text-yellow-700">We're building amazing lessons for this unit!</p>
+          </div>
+        )}
       </div>
 
       {/* Oklahoma Standards */}
