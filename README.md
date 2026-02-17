@@ -67,37 +67,41 @@ This curriculum addresses the **2020 Oklahoma Academic Standards for Science (OA
 
 ## Curriculum Structure
 
-### **Unit 1: God Made Everything! (Creation Week)**
+### **Unit 1: God Made Everything! (Creation Week)** ✅ COMPLETE
 *Focus: Genesis 1-2, Young Earth perspective*
-- Day 1: Light and Darkness
-- Day 2: Sky and Water
-- Day 3: Land and Plants
-- Day 4: Sun, Moon, and Stars
-- Day 5: Sea Creatures and Birds (Dinosaurs introduction!)
-- Day 6: Land Animals and People
-- Day 7: Rest and Reflection
+- ✅ Lesson 1: Day 1 - Light and Darkness (with videos & AI images)
+- ✅ Lesson 2: Day 2 - Sky and Water
+- ✅ Lesson 3: Day 3 - Land and Plants
+- ✅ Lesson 4: Day 4 - Sun, Moon, and Stars
+- ✅ Lesson 5: Day 5 - Sea Creatures and Birds
+- ✅ Lesson 6: Day 6 - Land Animals and People (Dinosaurs!)
+- ✅ Lesson 7: Day 7 - Rest and Reflection
+
+**Features:** Watercolor AI-generated hero images, YouTube educational videos, interactive review questions, hands-on activities
 
 **Bobby's Hook:** Dinosaurs created on Day 6! Big trucks would be needed to move all that dirt!
 
 ---
 
-### **Unit 2: Dinosaurs - God's Amazing Lizards**
+### **Unit 2: Dinosaurs - God's Amazing Lizards** ✅ LESSON 1 COMPLETE
 *Focus: Dinosaurs lived with people, created on Day 6*
-- What are dinosaurs? (Created kinds)
-- Herbivore vs. Carnivore dinosaurs (Before and after the Fall)
-- Where did dinosaurs go? (Flood connection)
-- Dinosaur fossils tell us about the Flood
-- Behemoth and Leviathan (Job 40-41)
+- ✅ Lesson 1: What Are Dinosaurs? (Created kinds on Day 6)
+- 🚧 Lesson 2: Herbivore vs. Carnivore dinosaurs (Before and after the Fall)
+- 🚧 Lesson 3: Where did dinosaurs go? (Flood connection)
+- 🚧 Lesson 4: Dinosaur fossils tell us about the Flood
+- 🚧 Lesson 5: Behemoth and Leviathan (Job 40-41)
+
+**Features:** Cartoon-style AI dinosaur images, Play-Doh activities, magnifying glass exploration
 
 **Scripture Focus:** Job 40:15-24 (Behemoth), Genesis 1:24-25, Genesis 6-9 (Flood)
 
 ---
 
-### **Unit 3: Big Machines, Big Ideas (Simple Machines)**
+### **Unit 3: Big Machines, Big Ideas (Forces & Motion)** ✅ LESSON 1 COMPLETE
 *Focus: Physics concepts through construction equipment*
-- Push and Pull (How excavators work)
-- Levers (How cranes lift heavy things)
-- Wheels and Motion (Dump trucks and bulldozers)
+- ✅ Lesson 1: Push and Pull Power (How excavators work)
+- 🚧 Lesson 2: Levers (How cranes lift heavy things)
+- 🚧 Lesson 3: Wheels and Motion (Dump trucks and bulldozers)
 - Ramps/Inclined Planes (Loading equipment)
 - God designed our world with patterns we can use!
 
@@ -105,62 +109,61 @@ This curriculum addresses the **2020 Oklahoma Academic Standards for Science (OA
 
 ---
 
-### **Unit 4: Bugs Are NOT Yucky! (Insects & Small Creatures)**
+### **Unit 4: Bugs Are NOT Yucky! (Insects & Small Creatures)** ✅ LESSON 1 COMPLETE
 *Focus: Overcoming aversion, seeing God's design in small things*
-- What makes a bug a bug? (6 legs, 3 body parts)
-- Ants: Tiny but strong! (Proverbs 6:6-8)
-- Butterflies: God's transformation (2 Corinthians 5:17)
-- Bees: Busy workers in God's garden
-- Spiders: Amazing engineers (Not insects, but cool!)
-- Even bugs show God's creativity!
+- ✅ Lesson 1: What Makes a Bug a Bug? (6 legs, 3 body parts)
+- 🚧 Lesson 2: Ants: Tiny but strong! (Proverbs 6:6-8)
+- 🚧 Lesson 3: Butterflies: God's transformation (2 Corinthians 5:17)
+- 🚧 Lesson 4: Bees: Busy workers in God's garden
+- 🚧 Lesson 5: Spiders: Amazing engineers (Not insects, but cool!)
 
 **Scripture Focus:** Proverbs 6:6-8 (Go to the ant), Matthew 6:26 (God feeds creatures)
 
 ---
 
-### **Unit 5: Plants God Made**
+### **Unit 5: Plants God Made** ✅ LESSON 1 COMPLETE
 *Focus: Plant life, design, cycles*
-- Seeds and Growth (Parable of the Sower)
-- Trees: From tiny seeds to giants
-- Flowers: God's beautiful design
-- Plants we eat vs. plants we don't
-- How plants help us and animals
+- ✅ Lesson 1: Seeds Are Amazing! (How tiny seeds become big plants)
+- 🚧 Lesson 2: Trees: From tiny seeds to giants
+- 🚧 Lesson 3: Flowers: God's beautiful design
+- 🚧 Lesson 4: Plants we eat vs. plants we don't
+- 🚧 Lesson 5: How plants help us and animals
 
 **Scripture Focus:** Genesis 1:11-12, Mark 4:1-20 (Parable of Sower), Matthew 6:28-30 (Lilies)
 
 ---
 
-### **Unit 6: Weather and Seasons**
+### **Unit 6: Weather and Seasons** ✅ LESSON 1 COMPLETE
 *Focus: Patterns in God's creation*
-- Sun, Moon, and Stars (God's calendar)
-- Day and Night
-- Seasons: Why do they change?
-- Rain and Rainbows (God's Promise)
-- Clouds and Wind
+- ✅ Lesson 1: Patterns in the Sky (Sun, moon, and stars follow God's design)
+- 🚧 Lesson 2: Day and Night
+- 🚧 Lesson 3: Seasons: Why do they change?
+- 🚧 Lesson 4: Rain and Rainbows (God's Promise)
+- 🚧 Lesson 5: Clouds and Wind
 
 **Scripture Focus:** Genesis 1:14-19, Genesis 8:22 (Seasons), Genesis 9:12-17 (Rainbow)
 
 ---
 
-### **Unit 7: Our Bodies - Fearfully and Wonderfully Made**
+### **Unit 7: Our Bodies - Fearfully and Wonderfully Made** ✅ LESSON 1 COMPLETE
 *Focus: Human body basics, senses*
-- Five Senses (How God lets us explore!)
-- Seeing: Light and Eyes
-- Hearing: Sound and Ears
-- Touching, Tasting, Smelling
-- We are special - made in God's image!
+- ✅ Lesson 1: Our Amazing Five Senses (How God designed us to explore)
+- 🚧 Lesson 2: Seeing: Light and Eyes
+- 🚧 Lesson 3: Hearing: Sound and Ears
+- 🚧 Lesson 4: Touching, Tasting, Smelling
+- 🚧 Lesson 5: We are special - made in God's image!
 
 **Scripture Focus:** Psalm 139:13-14 (Fearfully and wonderfully made), Genesis 1:27 (Image of God)
 
 ---
 
-### **Unit 8: The Earth God Gave Us**
+### **Unit 8: The Earth God Gave Us** ✅ LESSON 1 COMPLETE
 *Focus: Earth science, Flood geology*
-- Rocks and Soil (What excavators dig through!)
-- Mountains and Valleys (Fast formation during Flood)
-- Oceans and Rivers
-- The Global Flood Changed Everything
-- Fossils: Proof of the Flood
+- ✅ Lesson 1: Rocks and Soil God Made (Exploring the ground beneath our feet)
+- 🚧 Lesson 2: Mountains and Valleys (Fast formation during Flood)
+- 🚧 Lesson 3: Oceans and Rivers
+- 🚧 Lesson 4: The Global Flood Changed Everything
+- 🚧 Lesson 5: Fossils: Proof of the Flood
 
 **Scripture Focus:** Genesis 6-9, Psalm 104:5-9, 2 Peter 3:3-6
 

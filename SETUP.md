@@ -78,12 +78,15 @@ That's it! Vercel handles everything automatically.
 - Oklahoma Academic Standards alignment
 
 ### Technical Features
-- **Next.js 14** with App Router
+- **Next.js 16** with App Router
 - **TypeScript** for type safety
 - **Tailwind CSS** for styling
-- **Static export** - No server needed
+- **Server-side rendering** - Full Next.js features with API routes
+- **AI Image Generation** - DALL-E 3 integration for custom illustrations
+- **YouTube Video Integration** - Embedded educational videos
 - **Responsive design** - Works on tablets and computers
 - **Fast loading** - Optimized for performance
+- **Graceful degradation** - Works beautifully even without API keys
 
 ## 📁 Project Structure
 
@@ -93,10 +96,32 @@ That's it! Vercel handles everything automatically.
 │   ├── layout.tsx          # Root layout with nav/footer
 │   ├── page.tsx             # Home page
 │   ├── globals.css          # Global styles
+│   ├── api/
+│   │   ├── generate-image/  # DALL-E 3 AI image generation
+│   │   └── stock-photo/     # Pexels/Unsplash integration
 │   └── units/
 │       ├── page.tsx         # Units list page
 │       └── [id]/
-│           └── page.tsx     # Individual unit pages
+│           ├── page.tsx     # Individual unit pages
+│           └── lesson/
+│               └── [lessonId]/
+│                   └── page.tsx  # Dynamic lesson pages
+├── components/
+│   ├── AIImage.tsx          # AI image generation component
+│   └── YouTubeVideo.tsx     # Video embedding component
+├── data/
+│   ├── types.ts             # TypeScript interfaces
+│   └── lessons/             # Lesson content for all units
+│       ├── unit-1-lessons.ts   # 7 complete lessons
+│       ├── unit-2-lessons.ts   # Dinosaurs lesson 1
+│       ├── unit-3-lessons.ts   # Forces lesson 1
+│       ├── unit-4-lessons.ts   # Bugs lesson 1
+│       ├── unit-5-lessons.ts   # Plants lesson 1
+│       ├── unit-6-lessons.ts   # Sky patterns lesson 1
+│       ├── unit-7-lessons.ts   # Five senses lesson 1
+│       └── unit-8-lessons.ts   # Rocks & soil lesson 1
+├── lib/
+│   └── imageService.ts      # Image generation utilities
 ├── public/
 │   └── images/              # Add lesson images here
 ├── README.md                # Curriculum overview
@@ -111,31 +136,42 @@ That's it! Vercel handles everything automatically.
 ## 🎯 What's Included
 
 ### Units Currently Available:
-1. ✅ **Unit 1:** God Made Everything! (Creation Week) - 7 lessons
-2. ✅ **Unit 2:** Dinosaurs (God's Amazing Lizards) - 5 lessons
-3. 🚧 **Unit 3:** Big Machines (coming soon)
-4. 🚧 **Unit 4:** Bugs Are Cool! (coming soon)
-5. 🚧 **Unit 5:** Amazing Plants (coming soon)
-6. 🚧 **Unit 6:** Weather & Seasons (coming soon)
-7. 🚧 **Unit 7:** My Amazing Body (coming soon)
-8. 🚧 **Unit 8:** The Earth (coming soon)
+1. ✅ **Unit 1:** God Made Everything! (Creation Week) - **7 complete lessons**
+   - All lessons with AI-generated watercolor hero images
+   - Interactive review questions
+   - Hands-on activities with visual guides
+   - YouTube educational videos integrated
+2. ✅ **Unit 2:** Dinosaurs (God's Amazing Lizards) - **Lesson 1 complete**
+3. ✅ **Unit 3:** Big Machines (Forces & Motion) - **Lesson 1 complete**
+4. ✅ **Unit 4:** Bugs Are Cool! (Insects) - **Lesson 1 complete**
+5. ✅ **Unit 5:** Amazing Plants (Seeds & Growth) - **Lesson 1 complete**
+6. ✅ **Unit 6:** Weather & Seasons (Sky Patterns) - **Lesson 1 complete**
+7. ✅ **Unit 7:** My Amazing Body (Five Senses) - **Lesson 1 complete**
+8. ✅ **Unit 8:** The Earth (Rocks & Soil) - **Lesson 1 complete**
+
+**Total: 14 complete interactive lessons with full content!**
 
 ### Completed Content:
 - ✅ Home page with unit navigation
 - ✅ Units overview page
-- ✅ Unit 1 complete with all lessons
-- ✅ Unit 2 complete with all lessons
-- ✅ Scripture references throughout
-- ✅ Activity suggestions
+- ✅ Unit 1 complete with 7 full lessons
+- ✅ Units 2-8 each with lesson 1 complete
+- ✅ **AI-generated hero images** for every lesson (DALL-E 3)
+- ✅ **YouTube video integration** with educational content
+- ✅ **Interactive review questions** with click-to-answer functionality
+- ✅ **Hands-on activities** with detailed materials lists and steps
+- ✅ Scripture references throughout (ESV)
+- ✅ Vocabulary with emojis for visual learners
 - ✅ Oklahoma standards alignment
+- ✅ Comprehensive fallback system for offline/demo use
+- ✅ Responsive design optimized for kids
 
 ### To Be Added:
-- Individual lesson pages with detailed content
-- Image galleries with AI-generated illustrations
+- Remaining lessons for Units 2-8 (Lessons 2+)
 - Printable worksheets
-- Activity instruction pages
-- Assessment tools
 - Progress tracking
+- Parent dashboard
+- Assessment tools
 
 ## 🖼️ Adding Images
 
@@ -219,12 +255,28 @@ npm run lint         # Check code quality
 
 ## 🌐 Environment Variables
 
-None required for basic deployment! 
+### Required for AI Features
+Add these to your Vercel dashboard (Settings → Environment Variables):
 
-Optional (for future AI image generation):
-- `ANTHROPIC_API_KEY` - Claude/Sonnet API
-- `OPENAI_API_KEY` - DALL-E API
-- `GEMINI_API_KEY` - Google Gemini API
+```env
+OPENAI_API_KEY=your_openai_key_here
+```
+
+### Optional (Stock Photo Fallbacks)
+```env
+PEXELS_API_KEY=your_pexels_key_here
+UNSPLASH_ACCESS_KEY=your_unsplash_key_here
+```
+
+### How to Add to Vercel:
+1. Go to [vercel.com/dashboard](https://vercel.com/dashboard)
+2. Select your project
+3. Navigate to Settings → Environment Variables
+4. Add each key with value
+5. Select "Production, Preview, Development"
+6. Save and redeploy
+
+**Note:** The app works perfectly without API keys (shows professional placeholders). Add keys to enable AI-generated images!
 
 ## 📊 Performance
 
@@ -283,8 +335,9 @@ npm run build
 
 ### Deployment issues
 - Ensure Node.js 18+ is being used
-- Check that `output: 'export'` is in next.config.js
 - Verify all dependencies are in package.json
+- Check that API routes are not being statically exported
+- Ensure environment variables are set in Vercel dashboard (not just .env.local)
 
 ## 📞 Support
 
