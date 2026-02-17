@@ -140,8 +140,9 @@ const unitData: Record<string, any> = {
   },
 }
 
-export default function UnitPage({ params }: { params: { id: string } }) {
-  const unit = unitData[params.id]
+export default async function UnitPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const unit = unitData[id]
 
   if (!unit) {
     return (

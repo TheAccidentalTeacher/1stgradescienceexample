@@ -46,10 +46,11 @@ function getLessonData(unitId: number, lessonId: number): Lesson | null {
   return lessons.find(l => l.lessonNumber === lessonId) || null
 }
 
-export default function LessonPage({ params }: { params: { id: string; lessonId: string } }) {
-  const unitId = parseInt(params.id)
-  const lessonId = parseInt(params.lessonId)
-  const lesson = getLessonData(unitId, lessonId)
+export default async function LessonPage({ params }: { params: Promise<{ id: string; lessonId: string }> }) {
+  const { id, lessonId } = await params
+  const unitId = parseInt(id)
+  const lessonIdNum = parseInt(lessonId)
+  const lesson = getLessonData(unitId, lessonIdNum)
 
   if (!lesson) {
     return (
