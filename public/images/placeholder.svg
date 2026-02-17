@@ -1,0 +1,7 @@
+<!-- Placeholder for image placeholders -->
+<svg width="1024" height="1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#e0e7ff"/>
+  <text x="512" y="512" font-family="Arial, sans-serif" font-size="48" fill="#6366f1" text-anchor="middle" dominant-baseline="middle">
+    Image Placeholder
+  </text>
+</svg>

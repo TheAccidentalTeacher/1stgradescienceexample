@@ -31,6 +31,12 @@ export default function AIImage({ prompt, style = 'cartoon', alt, className = ''
         body: JSON.stringify({ prompt, style })
       })
       
+      if (response.status === 503) {
+        // API key not configured - show friendly message
+        setError(true)
+        return
+      }
+      
       if (!response.ok) throw new Error('Generation failed')
       
       const data = await response.json()
@@ -66,16 +72,18 @@ export default function AIImage({ prompt, style = 'cartoon', alt, className = ''
   
   if (error || !imageUrl) {
     return (
-      <div className={`bg-yellow-50 border-4 border-yellow-300 rounded-2xl p-6 ${className}`}>
-        <p className="text-xl font-bold text-yellow-800 text-center">
-          Oops! Couldn&apos;t create the picture right now.
-        </p>
-        <button
-          onClick={generateImage}
-          className="mt-4 bg-yellow-600 text-white px-6 py-3 rounded-xl font-bold text-lg hover:bg-yellow-700 transition-colors mx-auto block"
-        >
-          Try Again
-        </button>
+      <div className={`bg-gradient-to-br from-blue-100 to-purple-100 border-4 border-blue-300 rounded-2xl p-6 ${className}`}>
+        <div className="text-center">
+          <p className="text-2xl font-bold text-blue-900 mb-3">
+            🎨 Image Preview
+          </p>
+          <p className="text-lg text-gray-700 mb-4">
+            {alt}
+          </p>
+          <p className="text-md text-gray-600 italic">
+            AI image generation ready when API keys are configured
+          </p>
+        </div>
       </div>
     )
   }

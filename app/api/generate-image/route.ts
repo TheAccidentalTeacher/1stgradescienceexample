@@ -7,6 +7,14 @@ const openai = new OpenAI({
 
 export async function POST(request: Request) {
   try {
+    // Check if API key is configured
+    if (!process.env.OPENAI_API_KEY) {
+      return NextResponse.json(
+        { error: 'OpenAI API key not configured' },
+        { status: 503 }
+      )
+    }
+
     const { prompt, style } = await request.json()
     
     // Map style to DALL-E parameters
@@ -28,7 +36,11 @@ export async function POST(request: Request) {
       style: style === 'line-art' ? 'natural' : 'vivid'
     })
     
-    const imageUrl = response.data[0].url
+    const imageUrl = response.data?.[0]?.url
+    
+    if (!imageUrl) {
+      throw new Error('No image URL returned from OpenAI')
+    }
     
     return NextResponse.json({ imageUrl })
   } catch (error: any) {

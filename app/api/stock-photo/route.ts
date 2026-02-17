@@ -27,11 +27,15 @@ export async function GET(request: Request) {
 }
 
 async function fetchFromPexels(query: string) {
+  if (!process.env.PEXELS_API_KEY) {
+    throw new Error('Pexels API key not configured')
+  }
+
   const response = await fetch(
     `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape`,
     {
       headers: {
-        Authorization: process.env.PEXELS_API_KEY || ''
+        Authorization: process.env.PEXELS_API_KEY
       }
     }
   )
@@ -39,12 +43,16 @@ async function fetchFromPexels(query: string) {
   if (!response.ok) throw new Error('Pexels API error')
   
   const data = await response.json()
-  const imageUrl = data.photos[0]?.src?.large || '/images/placeholder.jpg'
+  const imageUrl = data.photos?.[0]?.src?.large || '/images/placeholder.jpg'
   
   return NextResponse.json({ imageUrl })
 }
 
 async function fetchFromUnsplash(query: string) {
+  if (!process.env.UNSPLASH_ACCESS_KEY) {
+    throw new Error('Unsplash API key not configured')
+  }
+
   const response = await fetch(
     `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape`,
     {
@@ -57,7 +65,7 @@ async function fetchFromUnsplash(query: string) {
   if (!response.ok) throw new Error('Unsplash API error')
   
   const data = await response.json()
-  const imageUrl = data.results[0]?.urls?.regular || '/images/placeholder.jpg'
+  const imageUrl = data.results?.[0]?.urls?.regular || '/images/placeholder.jpg'
   
   return NextResponse.json({ imageUrl })
 }
