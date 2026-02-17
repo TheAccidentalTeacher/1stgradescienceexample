@@ -11,6 +11,8 @@ import { unit8Lessons } from '@/data/lessons/unit-8-lessons'
 import { Lesson } from '@/data/types'
 import AIImage from '@/components/AIImage'
 import YouTubeVideo from '@/components/YouTubeVideo'
+import VocabCard from '@/components/VocabCard'
+import VocabProgress from '@/components/VocabProgress'
 
 // Generate static params for all lessons
 export function generateStaticParams() {
@@ -132,18 +134,27 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         </div>
       </div>
 
-      {/* Vocabulary Words */}
+      {/* Vocabulary Words - Interactive! */}
       <div>
         <h2 className="text-4xl font-bold text-gray-900 mb-6">📚 New Words to Learn</h2>
-        <div className="grid md:grid-cols-2 gap-4">
+        
+        {/* Progress Tracker */}
+        <VocabProgress 
+          lessonId={`unit-${unitId}-lesson-${lessonIdNum}`}
+          totalWords={lesson.vocabulary.length}
+        />
+        
+        {/* Interactive Vocab Cards */}
+        <div className="grid md:grid-cols-2 gap-4 mt-6">
           {lesson.vocabulary.map((vocab, index) => (
-            <div key={index} className="bg-blue-50 rounded-xl p-6 border-2 border-blue-300">
-              <div className="flex items-center gap-3 mb-2">
-                {vocab.emoji && <span className="text-4xl">{vocab.emoji}</span>}
-                <h3 className="text-3xl font-bold text-blue-900">{vocab.word}</h3>
-              </div>
-              <p className="text-xl text-gray-700">{vocab.definition}</p>
-            </div>
+            <VocabCard
+              key={index}
+              word={vocab.word}
+              definition={vocab.definition}
+              emoji={vocab.emoji}
+              lessonId={`unit-${unitId}-lesson-${lessonIdNum}`}
+              wordIndex={index}
+            />
           ))}
         </div>
       </div>
