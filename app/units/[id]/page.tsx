@@ -198,7 +198,11 @@ export default function UnitPage({ params }: { params: { id: string } }) {
         <h2 className="text-4xl font-bold mb-6 text-gray-900">Lessons 📖</h2>
         <div className="space-y-6">
           {unit.lessons.map((lesson: any, index: number) => (
-            <div key={index} className="activity-card hover:border-primary">
+            <Link 
+              key={index} 
+              href={`/units/${unit.id}/lesson/${lesson.day || index + 1}`}
+              className="activity-card hover:border-primary block transition-all hover:scale-102 hover:shadow-xl cursor-pointer"
+            >
               <div className="flex items-start gap-4">
                 <div className="bg-gradient-to-br from-blue-500 to-green-500 text-white text-3xl font-bold w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0">
                   {lesson.day || index + 1}
@@ -217,9 +221,13 @@ export default function UnitPage({ params }: { params: { id: string } }) {
                       ))}
                     </ul>
                   </div>
+                  <div className="mt-4 flex items-center gap-2 text-blue-600 font-bold text-xl">
+                    <span>Start Lesson</span>
+                    <span className="text-2xl">→</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
