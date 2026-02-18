@@ -1,46 +1,82 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Volume2, VolumeX, Settings } from 'lucide-react'
 
 export default function AccessibilityPanel() {
   const [isOpen, setIsOpen] = useState(false)
-  const [autoRead, setAutoRead] = useState(false)
   const [speechRate, setSpeechRate] = useState(0.9)
-  const [isSupported, setIsSupported] = useState(false)
+  const [speechVoice, setSpeechVoice] = useState('nova')
+  const [isPlaying, setIsPlaying] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    setIsSupported(typeof window !== 'undefined' && 'speechSynthesis' in window)
-    
     // Load saved settings
-    const savedAutoRead = localStorage.getItem('autoRead') === 'true'
     const savedRate = parseFloat(localStorage.getItem('speechRate') || '0.9')
-    setAutoRead(savedAutoRead)
+    const savedVoice = localStorage.getItem('speechVoice') || 'nova'
     setSpeechRate(savedRate)
+    setSpeechVoice(savedVoice)
   }, [])
-
-  const toggleAutoRead = () => {
-    const newValue = !autoRead
-    setAutoRead(newValue)
-    localStorage.setItem('autoRead', newValue.toString())
-  }
 
   const updateSpeed = (newRate: number) => {
     setSpeechRate(newRate)
     localStorage.setItem('speechRate', newRate.toString())
   }
 
-  const testVoice = () => {
-    if (!isSupported) return
-    
-    window.speechSynthesis.cancel()
-    const utterance = new SpeechSynthesisUtterance("This is how the reading voice sounds! Click the speaker buttons to hear any text on the page.")
-    utterance.rate = speechRate
-    utterance.pitch = 1.1
-    window.speechSynthesis.speak(utterance)
+  const updateVoice = (newVoice: string) => {
+    setSpeechVoice(newVoice)
+    localStorage.setItem('speechVoice', newVoice)
   }
 
-  if (!isSupported) return null
+  const testVoice = async () => {
+    if (isPlaying) {
+      // Stop current playback
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current = null
+      }
+      setIsPlaying(false)
+      return
+    }
+
+    setIsPlaying(true)
+
+    try {
+      const response = await fetch('/api/text-to-speech', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: "Hi! I'm your reading helper! Click the speaker buttons to hear any text on the page. You can change my voice and how fast I talk. Let's learn about God's amazing creation together!",
+          voice: speechVoice,
+          speed: speechRate
+        })
+      })
+
+      if (!response.ok) throw new Error('TTS failed')
+
+      const audioBlob = await response.blob()
+      const audioUrl = URL.createObjectURL(audioBlob)
+      const audio = new Audio(audioUrl)
+      audioRef.current = audio
+
+      audio.onended = () => {
+        setIsPlaying(false)
+        URL.revokeObjectURL(audioUrl)
+      }
+
+      audio.onerror = () => {
+        setIsPlaying(false)
+        URL.revokeObjectURL(audioUrl)
+      }
+
+      await audio.play()
+    } catch (error) {
+      console.error('Test voice error:', error)
+      setIsPlaying(false)
+    }
+  }
 
   return (
     <>
@@ -77,10 +113,80 @@ export default function AccessibilityPanel() {
             {/* Test voice button */}
             <button
               onClick={testVoice}
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl transition-all hover:scale-105"
+              className={`w-full ${isPlaying ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'} text-white font-bold py-3 px-4 rounded-xl transition-all hover:scale-105`}
             >
-              🔊 Test Voice
+              {isPlaying ? '⏹️ Stop Test' : '🔊 Test Voice'}
             </button>
+
+            {/* Voice selection */}
+            <div>
+              <label className="block text-lg font-semibold text-gray-700 mb-2">
+                Choose a Voice:
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => updateVoice('alloy')}
+                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                    speechVoice === 'alloy' 
+                      ? 'bg-purple-500 text-white scale-105' 
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  Alloy ✨
+                </button>
+                <button
+                  onClick={() => updateVoice('echo')}
+                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                    speechVoice === 'echo' 
+                      ? 'bg-purple-500 text-white scale-105' 
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  Echo 🎵
+                </button>
+                <button
+                  onClick={() => updateVoice('fable')}
+                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                    speechVoice === 'fable' 
+                      ? 'bg-purple-500 text-white scale-105' 
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  Fable 📖
+                </button>
+                <button
+                  onClick={() => updateVoice('onyx')}
+                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                    speechVoice === 'onyx' 
+                      ? 'bg-purple-500 text-white scale-105' 
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  Onyx 🎤
+                </button>
+                <button
+                  onClick={() => updateVoice('nova')}
+                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                    speechVoice === 'nova' 
+                      ? 'bg-purple-500 text-white scale-105' 
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  Nova 🌟
+                </button>
+                <button
+                  onClick={() => updateVoice('shimmer')}
+                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                    speechVoice === 'shimmer' 
+                      ? 'bg-purple-500 text-white scale-105' 
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  Shimmer ✨
+                </button>
+              </div>
+              <p className="text-xs text-gray-600 mt-2 italic">💡 Nova and Shimmer are great for kids!</p>
+            </div>
 
             {/* Speed control */}
             <div>

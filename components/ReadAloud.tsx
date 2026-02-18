@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Volume2, VolumeX, Pause } from 'lucide-react'
 
 interface ReadAloudProps {
@@ -20,78 +20,115 @@ export default function ReadAloud({
 }: ReadAloudProps) {
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
-  const [isSupported, setIsSupported] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    // Check if browser supports speech synthesis
-    setIsSupported(typeof window !== 'undefined' && 'speechSynthesis' in window)
-    
     // Auto-read if enabled
-    if (autoRead && isSupported) {
+    if (autoRead) {
       setTimeout(() => speak(), 500) // Small delay for better UX
     }
 
     return () => {
-      if (typeof window !== 'undefined' && window.speechSynthesis) {
-        window.speechSynthesis.cancel()
+      // Cleanup audio on unmount
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current = null
       }
     }
-  }, [autoRead, isSupported])
+  }, [autoRead])
 
-  const speak = () => {
-    if (!isSupported || !text) return
+  const speak = async () => {
+    if (!text) return
 
-    // Cancel any ongoing speech
-    window.speechSynthesis.cancel()
+    setIsLoading(true)
 
-    const utterance = new SpeechSynthesisUtterance(text)
-    
-    // Get user's preferred speed from accessibility settings, or use default
-    const savedRate = parseFloat(localStorage.getItem('speechRate') || '0.9')
-    
-    // Kid-friendly settings
-    utterance.rate = savedRate // User's preference or 0.9 default
-    utterance.pitch = 1.1 // Slightly higher pitch (friendly)
-    utterance.volume = 1.0
+    try {
+      // Get user preferences
+      const savedRate = parseFloat(localStorage.getItem('speechRate') || '0.9')
+      const savedVoice = localStorage.getItem('speechVoice') || 'nova' // nova is kid-friendly
 
-    utterance.onstart = () => {
-      setIsSpeaking(true)
-      setIsPaused(false)
-    }
+      // Call OpenAI TTS API
+      const response = await fetch('/api/text-to-speech', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text,
+          voice: savedVoice,
+          speed: savedRate
+        })
+      })
 
-    utterance.onend = () => {
+      if (!response.ok) {
+        throw new Error('TTS API failed')
+      }
+
+      // Get audio blob
+      const audioBlob = await response.blob()
+      const audioUrl = URL.createObjectURL(audioBlob)
+
+      // Create and play audio element
+      const audio = new Audio(audioUrl)
+      audioRef.current = audio
+
+      audio.onplay = () => {
+        setIsSpeaking(true)
+        setIsPaused(false)
+        setIsLoading(false)
+      }
+
+      audio.onended = () => {
+        setIsSpeaking(false)
+        setIsPaused(false)
+        URL.revokeObjectURL(audioUrl)
+      }
+
+      audio.onerror = () => {
+        setIsSpeaking(false)
+        setIsPaused(false)
+        setIsLoading(false)
+        URL.revokeObjectURL(audioUrl)
+      }
+
+      await audio.play()
+
+    } catch (error) {
+      console.error('Speech error:', error)
+      setIsLoading(false)
       setIsSpeaking(false)
       setIsPaused(false)
     }
-
-    utterance.onerror = () => {
-      setIsSpeaking(false)
-      setIsPaused(false)
-    }
-
-    window.speechSynthesis.speak(utterance)
   }
 
   const pause = () => {
-    if (!isSupported) return
+    if (!audioRef.current) return
     
     if (isPaused) {
-      window.speechSynthesis.resume()
+      audioRef.current.play()
       setIsPaused(false)
     } else {
-      window.speechSynthesis.pause()
+      audioRef.current.pause()
       setIsPaused(true)
     }
   }
 
   const stop = () => {
-    if (!isSupported) return
-    window.speechSynthesis.cancel()
+    if (!audioRef.current) return
+    audioRef.current.pause()
+    audioRef.current.currentTime = 0
     setIsSpeaking(false)
     setIsPaused(false)
   }
 
-  if (!isSupported) return null
+  if (isLoading) {
+    return (
+      <div className="inline-flex items-center gap-2">
+        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+      </div>
+    )
+  }
 
   const iconSizes = {
     sm: 'w-4 h-4',

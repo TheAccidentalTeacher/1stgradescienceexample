@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Check, Star, Sparkles, Volume2 } from 'lucide-react'
 
 interface VocabCardProps {
@@ -14,6 +14,7 @@ interface VocabCardProps {
 export default function VocabCard({ word, definition, emoji, lessonId, wordIndex }: VocabCardProps) {
   const [isLearned, setIsLearned] = useState(false)
   const [isFlipping, setIsFlipping] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
   const storageKey = `vocab-${lessonId}-${wordIndex}`
 
   useEffect(() => {
@@ -24,20 +25,14 @@ export default function VocabCard({ word, definition, emoji, lessonId, wordIndex
     }
   }, [storageKey])
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (isLearned) return // Already learned, don't do anything
 
     // Flip animation
     setIsFlipping(true)
     
-    // Speak the word and definition for non-readers
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      const savedRate = parseFloat(localStorage.getItem('speechRate') || '0.85')
-      const utterance = new SpeechSynthesisUtterance(`${word}. ${definition}`)
-      utterance.rate = savedRate // Use user's preference
-      utterance.pitch = 1.1 // Kid-friendly
-      window.speechSynthesis.speak(utterance)
-    }
+    // Speak the word and definition using OpenAI TTS
+    speakText(`${word}. ${definition}`)
     
     setTimeout(() => {
       setIsLearned(true)
@@ -51,17 +46,44 @@ export default function VocabCard({ word, definition, emoji, lessonId, wordIndex
     }, 300)
   }
 
-  const hearAgain = (e: React.MouseEvent) => {
+  const speakText = async (text: string) => {
+    try {
+      const savedRate = parseFloat(localStorage.getItem('speechRate') || '0.9')
+      const savedVoice = localStorage.getItem('speechVoice') || 'nova'
+
+      const response = await fetch('/api/text-to-speech', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, voice: savedVoice, speed: savedRate })
+      })
+
+      if (!response.ok) return
+
+      const audioBlob = await response.blob()
+      const audioUrl = URL.createObjectURL(audioBlob)
+      const audio = new Audio(audioUrl)
+      audioRef.current = audio
+
+      audio.onended = () => URL.revokeObjectURL(audioUrl)
+      audio.onerror = () => URL.revokeObjectURL(audioUrl)
+
+      await audio.play()
+    } catch (error) {
+      console.error('Vocab speech error:', error)
+    }
+  }
+
+  const hearAgain = async (e: React.MouseEvent) => {
     e.stopPropagation() // Don't trigger the card click
     
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel() // Stop any current speech
-      const savedRate = parseFloat(localStorage.getItem('speechRate') || '0.85')
-      const utterance = new SpeechSynthesisUtterance(`${word}. ${definition}`)
-      utterance.rate = savedRate
-      utterance.pitch = 1.1
-      window.speechSynthesis.speak(utterance)
+    // Stop any current audio
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current = null
     }
+    
+    // Speak again using OpenAI TTS
+    speakText(`${word}. ${definition}`)
   }
 
   return (
