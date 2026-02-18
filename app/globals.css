@@ -49,6 +49,45 @@ body {
   animation: bounce-gentle 0.5s ease-in-out;
 }
 
+/* Touch-friendly tap targets for tablets/mobile */
+@layer utilities {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better touch feedback */
+  .tap-highlight {
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.3);
+  }
+  
+  /* Prevent text selection on buttons for better touch UX */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Active state for touch devices */
+  .touch-active:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+/* Smooth scrolling on mobile */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Ensure buttons are easy to tap */
+button, a {
+  -webkit-tap-highlight-color: rgba(59, 130, 246, 0.3);
+}
+
 /* Large clickable areas for easy navigation */
 .nav-button {
   @apply min-h-[80px] text-2xl font-bold rounded-xl transition-all transform hover:scale-105;

@@ -137,9 +137,9 @@ export default function ReadAloud({
   }
 
   const buttonSizes = {
-    sm: 'p-1',
-    md: 'p-2',
-    lg: 'p-3'
+    sm: 'p-2 min-w-[44px] min-h-[44px]', // Touch-friendly minimum
+    md: 'p-3 min-w-[48px] min-h-[48px]',
+    lg: 'p-4 min-w-[52px] min-h-[52px]'
   }
 
   return (
@@ -149,29 +149,32 @@ export default function ReadAloud({
           onClick={speak}
           className={`
             ${buttonSizes[iconSize]}
-            bg-blue-500 hover:bg-blue-600 
+            bg-blue-500 hover:bg-blue-600 active:bg-blue-700
             text-white rounded-full 
             transition-all duration-200
             hover:scale-110 active:scale-95
             shadow-md hover:shadow-lg
-            flex items-center gap-2
+            flex items-center justify-center gap-2
+            tap-highlight touch-active no-select
           `}
           title="Click to hear this read aloud"
           aria-label="Read aloud"
         >
           <Volume2 className={iconSizes[iconSize]} />
-          {showLabel && <span className="text-sm font-bold pr-2">Listen 🔊</span>}
+          {showLabel && <span className="text-sm md:text-base font-bold pr-2">Listen 🔊</span>}
         </button>
       ) : (
-        <div className="flex gap-1">
+        <div className="flex gap-1 md:gap-2">
           <button
             onClick={pause}
             className={`
               ${buttonSizes[iconSize]}
-              bg-orange-500 hover:bg-orange-600 
+              bg-orange-500 hover:bg-orange-600 active:bg-orange-700
               text-white rounded-full 
               transition-all duration-200
               shadow-md
+              flex items-center justify-center
+              tap-highlight touch-active no-select
               ${isPaused ? 'animate-pulse' : ''}
             `}
             title={isPaused ? "Resume" : "Pause"}
@@ -187,10 +190,12 @@ export default function ReadAloud({
             onClick={stop}
             className={`
               ${buttonSizes[iconSize]}
-              bg-red-500 hover:bg-red-600 
+              bg-red-500 hover:bg-red-600 active:bg-red-700
               text-white rounded-full 
               transition-all duration-200
               shadow-md
+              flex items-center justify-center
+              tap-highlight touch-active no-select
             `}
             title="Stop"
             aria-label="Stop reading"

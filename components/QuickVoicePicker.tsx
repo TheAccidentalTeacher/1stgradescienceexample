@@ -27,20 +27,21 @@ export default function QuickVoicePicker() {
   }
 
   return (
-    <div className="flex items-center gap-2 bg-white/20 rounded-full px-3 py-1 backdrop-blur-sm">
-      <Volume2 className="w-5 h-5 text-white" />
+    <div className="flex items-center gap-2 bg-white/20 rounded-full px-2 md:px-3 py-1 backdrop-blur-sm touch-target">
+      <Volume2 className="w-4 h-4 md:w-5 md:h-5 text-white flex-shrink-0" />
       <select
         value={selectedVoice}
         onChange={handleChange}
-        className="bg-transparent text-white font-bold text-base border-none outline-none cursor-pointer appearance-none pr-6"
+        className="bg-transparent text-white font-bold text-sm md:text-base border-none outline-none cursor-pointer appearance-none pr-5 md:pr-6 tap-highlight no-select"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'right 0.5rem center',
+          backgroundPosition: 'right 0.25rem center',
+          minHeight: '44px', // Touch-friendly on mobile
         }}
       >
         {voices.map((voice) => (
-          <option key={voice.id} value={voice.id} className="text-gray-900">
+          <option key={voice.id} value={voice.id} className="text-gray-900 text-base">
             {voice.name} {voice.recommended ? '⭐' : ''}
           </option>
         ))}

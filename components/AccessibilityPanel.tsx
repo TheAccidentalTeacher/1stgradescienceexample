@@ -80,30 +80,30 @@ export default function AccessibilityPanel() {
 
   return (
     <>
-      {/* Floating button */}
+      {/* Floating button - Mobile optimized */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 bg-purple-600 hover:bg-purple-700 text-white rounded-full p-4 shadow-2xl transition-all hover:scale-110 active:scale-95"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white rounded-full p-3 md:p-4 shadow-2xl transition-all hover:scale-110 active:scale-95 tap-highlight touch-active no-select touch-target"
         title="Accessibility Settings"
         aria-label="Accessibility Settings"
       >
-        <Settings className="w-8 h-8 animate-spin-slow" />
+        <Settings className="w-7 h-7 md:w-8 md:h-8 animate-spin-slow" />
         <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
           🔊
         </span>
       </button>
 
-      {/* Panel */}
+      {/* Panel - Responsive for mobile/tablet */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 bg-white rounded-2xl shadow-2xl border-4 border-purple-500 p-6 w-80">
+        <div className="fixed bottom-20 md:bottom-24 right-2 left-2 md:left-auto md:right-6 z-50 bg-white rounded-2xl shadow-2xl border-4 border-purple-500 p-4 md:p-6 md:w-80 max-h-[80vh] overflow-y-auto">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-2xl font-bold text-purple-900 flex items-center gap-2">
-              <Volume2 className="w-6 h-6" />
+            <h3 className="text-xl md:text-2xl font-bold text-purple-900 flex items-center gap-2">
+              <Volume2 className="w-5 h-5 md:w-6 md:h-6" />
               Reading Help
             </h3>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-gray-500 hover:text-gray-700 text-2xl"
+              className="text-gray-500 hover:text-gray-700 active:text-gray-900 text-2xl md:text-3xl touch-target tap-highlight no-select"
             >
               ×
             </button>
@@ -113,20 +113,20 @@ export default function AccessibilityPanel() {
             {/* Test voice button */}
             <button
               onClick={testVoice}
-              className={`w-full ${isPlaying ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'} text-white font-bold py-3 px-4 rounded-xl transition-all hover:scale-105`}
+              className={`w-full ${isPlaying ? 'bg-red-500 hover:bg-red-600 active:bg-red-700' : 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700'} text-white font-bold py-3 px-4 rounded-xl transition-all hover:scale-105 active:scale-95 tap-highlight touch-active no-select touch-target`}
             >
               {isPlaying ? '⏹️ Stop Test' : '🔊 Test Voice'}
             </button>
 
             {/* Voice selection */}
             <div>
-              <label className="block text-lg font-semibold text-gray-700 mb-2">
+              <label className="block text-base md:text-lg font-semibold text-gray-700 mb-2">
                 Choose a Voice:
               </label>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => updateVoice('alloy')}
-                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                  className={`py-2 px-2 md:px-3 rounded-lg font-bold transition-all text-xs md:text-sm touch-target tap-highlight touch-active no-select ${
                     speechVoice === 'alloy' 
                       ? 'bg-purple-500 text-white scale-105' 
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -136,50 +136,50 @@ export default function AccessibilityPanel() {
                 </button>
                 <button
                   onClick={() => updateVoice('echo')}
-                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                  className={`py-2 px-2 md:px-3 rounded-lg font-bold transition-all text-xs md:text-sm touch-target tap-highlight touch-active no-select ${
                     speechVoice === 'echo' 
                       ? 'bg-purple-500 text-white scale-105' 
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-400'
                   }`}
                 >
                   Echo 🎵
                 </button>
                 <button
                   onClick={() => updateVoice('fable')}
-                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                  className={`py-2 px-2 md:px-3 rounded-lg font-bold transition-all text-xs md:text-sm touch-target tap-highlight touch-active no-select ${
                     speechVoice === 'fable' 
                       ? 'bg-purple-500 text-white scale-105' 
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-400'
                   }`}
                 >
                   Fable 📖
                 </button>
                 <button
                   onClick={() => updateVoice('onyx')}
-                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                  className={`py-2 px-2 md:px-3 rounded-lg font-bold transition-all text-xs md:text-sm touch-target tap-highlight touch-active no-select ${
                     speechVoice === 'onyx' 
                       ? 'bg-purple-500 text-white scale-105' 
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-400'
                   }`}
                 >
                   Onyx 🎤
                 </button>
                 <button
                   onClick={() => updateVoice('nova')}
-                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                  className={`py-2 px-2 md:px-3 rounded-lg font-bold transition-all text-xs md:text-sm touch-target tap-highlight touch-active no-select ${
                     speechVoice === 'nova' 
                       ? 'bg-purple-500 text-white scale-105' 
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-400'
                   }`}
                 >
                   Nova 🌟
                 </button>
                 <button
                   onClick={() => updateVoice('shimmer')}
-                  className={`py-2 px-3 rounded-lg font-bold transition-all text-sm ${
+                  className={`py-2 px-2 md:px-3 rounded-lg font-bold transition-all text-xs md:text-sm touch-target tap-highlight touch-active no-select ${
                     speechVoice === 'shimmer' 
                       ? 'bg-purple-500 text-white scale-105' 
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-400'
                   }`}
                 >
                   Shimmer ✨
@@ -190,36 +190,36 @@ export default function AccessibilityPanel() {
 
             {/* Speed control */}
             <div>
-              <label className="block text-lg font-semibold text-gray-700 mb-2">
+              <label className="block text-base md:text-lg font-semibold text-gray-700 mb-2">
                 Reading Speed: {speechRate === 0.7 ? 'Slow 🐢' : speechRate === 0.9 ? 'Normal 🚶' : 'Fast 🏃'}
               </label>
               <div className="flex gap-2">
                 <button
                   onClick={() => updateSpeed(0.7)}
-                  className={`flex-1 py-2 rounded-lg font-bold transition-all ${
+                  className={`flex-1 py-3 rounded-lg font-bold transition-all touch-target tap-highlight touch-active no-select ${
                     speechRate === 0.7 
                       ? 'bg-green-500 text-white scale-105' 
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-400'
                   }`}
                 >
                   🐢 Slow
                 </button>
                 <button
                   onClick={() => updateSpeed(0.9)}
-                  className={`flex-1 py-2 rounded-lg font-bold transition-all ${
+                  className={`flex-1 py-3 rounded-lg font-bold transition-all touch-target tap-highlight touch-active no-select ${
                     speechRate === 0.9 
                       ? 'bg-green-500 text-white scale-105' 
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-400'
                   }`}
                 >
                   🚶 Normal
                 </button>
                 <button
                   onClick={() => updateSpeed(1.2)}
-                  className={`flex-1 py-2 rounded-lg font-bold transition-all ${
+                  className={`flex-1 py-3 rounded-lg font-bold transition-all touch-target tap-highlight touch-active no-select ${
                     speechRate === 1.2 
                       ? 'bg-green-500 text-white scale-105' 
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-400'
                   }`}
                 >
                   🏃 Fast
