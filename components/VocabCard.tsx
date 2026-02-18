@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Check, Star, Sparkles } from 'lucide-react'
+import { Check, Star, Sparkles, Volume2 } from 'lucide-react'
 
 interface VocabCardProps {
   word: string
@@ -30,6 +30,15 @@ export default function VocabCard({ word, definition, emoji, lessonId, wordIndex
     // Flip animation
     setIsFlipping(true)
     
+    // Speak the word and definition for non-readers
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      const savedRate = parseFloat(localStorage.getItem('speechRate') || '0.85')
+      const utterance = new SpeechSynthesisUtterance(`${word}. ${definition}`)
+      utterance.rate = savedRate // Use user's preference
+      utterance.pitch = 1.1 // Kid-friendly
+      window.speechSynthesis.speak(utterance)
+    }
+    
     setTimeout(() => {
       setIsLearned(true)
       localStorage.setItem(storageKey, 'true')
@@ -40,6 +49,19 @@ export default function VocabCard({ word, definition, emoji, lessonId, wordIndex
       
       setIsFlipping(false)
     }, 300)
+  }
+
+  const hearAgain = (e: React.MouseEvent) => {
+    e.stopPropagation() // Don't trigger the card click
+    
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel() // Stop any current speech
+      const savedRate = parseFloat(localStorage.getItem('speechRate') || '0.85')
+      const utterance = new SpeechSynthesisUtterance(`${word}. ${definition}`)
+      utterance.rate = savedRate
+      utterance.pitch = 1.1
+      window.speechSynthesis.speak(utterance)
+    }
   }
 
   return (
@@ -87,9 +109,19 @@ export default function VocabCard({ word, definition, emoji, lessonId, wordIndex
       )}
 
       {isLearned && (
-        <div className="mt-3 text-sm text-green-700 font-bold flex items-center gap-2">
-          <Check className="w-4 h-4" />
-          You learned this word! 🎉
+        <div className="mt-3 flex items-center justify-between">
+          <div className="text-sm text-green-700 font-bold flex items-center gap-2">
+            <Check className="w-4 h-4" />
+            You learned this word! 🎉
+          </div>
+          <button
+            onClick={hearAgain}
+            className="flex items-center gap-1 px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-sm font-semibold transition-all hover:scale-105"
+            title="Hear this word again"
+          >
+            <Volume2 className="w-3 h-3" />
+            Hear Again
+          </button>
         </div>
       )}
     </button>

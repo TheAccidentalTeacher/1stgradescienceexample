@@ -68,6 +68,7 @@ That's it! Vercel handles everything automatically.
 - **Heavy use of emojis and icons** - Visual learning support
 - **Simple navigation** - Large clickable areas
 - **Kid-friendly font** - Comic Sans MS style
+- **🔊 Text-to-speech accessibility** - Complete audio support for non-readers and ELL students
 
 ### Curriculum Features
 - 8 complete units covering all Oklahoma standards
@@ -76,6 +77,8 @@ That's it! Vercel handles everything automatically.
 - Interest-based content (dinosaurs 🦕, trucks 🚜, bugs 🐛)
 - Hands-on activity suggestions
 - Oklahoma Academic Standards alignment
+- **Interactive vocabulary learning** - Gamified click-to-collect word cards with auto-pronunciation
+- **Read-aloud capabilities** - Speaker buttons throughout all lessons
 
 ### Technical Features
 - **Next.js 16** with App Router
@@ -84,6 +87,8 @@ That's it! Vercel handles everything automatically.
 - **Server-side rendering** - Full Next.js features with API routes
 - **AI Image Generation** - DALL-E 3 integration for custom illustrations
 - **YouTube Video Integration** - Embedded educational videos
+- **Web Speech API** - Browser-native text-to-speech for accessibility
+- **localStorage** - Progress persistence for vocabulary tracking
 - **Responsive design** - Works on tablets and computers
 - **Fast loading** - Optimized for performance
 - **Graceful degradation** - Works beautifully even without API keys

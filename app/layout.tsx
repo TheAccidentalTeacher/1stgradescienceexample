@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import AccessibilityPanel from '@/components/AccessibilityPanel'
 
 export const metadata: Metadata = {
   title: "Bobby's Science Adventure",
@@ -46,6 +47,9 @@ export default function RootLayout({
             </p>
           </div>
         </footer>
+
+        {/* Accessibility Panel - Available on all pages */}
+        <AccessibilityPanel />
       </body>
     </html>
   )

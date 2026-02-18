@@ -1,12 +1,125 @@
-# Multimedia Components
+# Multimedia & Accessibility Components
 
-These components bring lessons to life with AI-generated images and educational videos!
+These components bring lessons to life with AI-generated images, educational videos, and comprehensive text-to-speech accessibility!
 
-## AIImage Component
+---
+
+## 🔊 Accessibility Components
+
+### ReadAloud Component
+
+Provides text-to-speech functionality throughout the curriculum, making content accessible for non-readers and ELL students.
+
+#### Usage
+
+```tsx
+import ReadAloud from '@/components/ReadAloud'
+
+// Basic usage
+<ReadAloud text="God created the heavens and the earth" />
+
+// With options
+<ReadAloud 
+  text="Today we're learning about light and sound!"
+  iconSize="lg"        // 'sm' | 'md' | 'lg'
+  showLabel={true}     // Shows "Listen 🔊" text
+  autoRead={false}     // Auto-play on component mount
+/>
+```
+
+#### Features
+- Play/pause/stop controls with visual feedback
+- Respects global speech rate settings from AccessibilityPanel
+- Kid-friendly voice settings (rate 0.9, pitch 1.1)
+- Three icon sizes for different contexts
+- Optional label display
+- Auto-read capability
+- Uses browser's Web Speech API (no external dependencies)
+
+---
+
+### AccessibilityPanel Component
+
+Global settings panel for text-to-speech preferences. Appears as a floating purple gear button on all pages.
+
+#### Usage
+
+```tsx
+import AccessibilityPanel from '@/components/AccessibilityPanel'
+
+// Add to layout (already included in app/layout.tsx)
+<AccessibilityPanel />
+```
+
+#### Features
+- Floating gear button (bottom-right corner)
+- Speed control: Slow 🐢 (0.7x) / Normal 🚶 (0.9x) / Fast 🏃 (1.2x)
+- Test voice button to preview settings
+- Settings persist in localStorage
+- Friendly UI with emojis and kid-appropriate design
+- Automatically syncs settings across all ReadAloud components
+
+---
+
+### VocabCard Component
+
+Interactive vocabulary learning cards with gamification and text-to-speech.
+
+#### Usage
+
+```tsx
+import VocabCard from '@/components/VocabCard'
+
+<VocabCard 
+  word="Photosynthesis"
+  definition="How plants make food using sunlight"
+  emoji="🌱"
+  lessonId="unit-1-lesson-1"
+  wordIndex={0}
+/>
+```
+
+#### Features
+- **Auto-speak on click**: Immediately speaks word + definition when clicked
+- **"Hear Again" button**: Replay pronunciation on learned cards
+- **Visual progress**: Cards turn green when learned
+- **Gamification**: Click-to-collect mechanic encourages engagement
+- **Persistent tracking**: Uses localStorage to remember learned words
+- **Respects global settings**: Uses speech rate from AccessibilityPanel
+
+---
+
+### VocabProgress Component
+
+Real-time progress tracking for vocabulary learning with celebration animations.
+
+#### Usage
+
+```tsx
+import VocabProgress from '@/components/VocabProgress'
+
+<VocabProgress 
+  lessonId="unit-1-lesson-1"
+  totalWords={8}
+/>
+```
+
+#### Features
+- Progress bar showing learned words
+- Lifetime statistics (total words learned across all lessons)
+- Celebration overlay when all words completed
+- Persistent tracking via localStorage
+- Reset button for re-learning
+
+---
+
+## 🎨 Multimedia Components (AI & Video)
+
+### AIImage Component
 
 Generates kid-friendly educational images using DALL-E 3.
 
-### Usage
+#### Usage
 
 ```tsx
 import AIImage from '@/components/AIImage'

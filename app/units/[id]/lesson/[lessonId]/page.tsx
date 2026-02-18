@@ -13,6 +13,7 @@ import AIImage from '@/components/AIImage'
 import YouTubeVideo from '@/components/YouTubeVideo'
 import VocabCard from '@/components/VocabCard'
 import VocabProgress from '@/components/VocabProgress'
+import ReadAloud from '@/components/ReadAloud'
 
 // Generate static params for all lessons
 export function generateStaticParams() {
@@ -92,8 +93,16 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
                 <span className="text-lg">{lesson.estimatedTime}</span>
               </div>
             </div>
-            <h1 className="text-5xl font-bold">{lesson.title}</h1>
-            <p className="text-2xl opacity-90">{lesson.subtitle}</p>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h1 className="text-5xl font-bold">{lesson.title}</h1>
+                <p className="text-2xl opacity-90">{lesson.subtitle}</p>
+              </div>
+              <ReadAloud 
+                text={`Lesson ${lessonIdNum}: ${lesson.title}. ${lesson.subtitle}`}
+                iconSize="lg"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -113,7 +122,13 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         <div className="flex items-start gap-3 mb-3">
           <BookOpen className="w-8 h-8 text-blue-700 flex-shrink-0 mt-1" />
           <div className="flex-grow">
-            <p className="text-2xl mb-3">&quot;{lesson.scripture.text}&quot;</p>
+            <div className="flex items-start justify-between gap-3 mb-3">
+              <p className="text-2xl flex-grow">&quot;{lesson.scripture.text}&quot;</p>
+              <ReadAloud 
+                text={`${lesson.scripture.text}. ${lesson.scripture.reference}`}
+                iconSize="lg"
+              />
+            </div>
             <p className="text-xl text-blue-700 font-bold">— {lesson.scripture.reference}</p>
           </div>
         </div>
@@ -121,9 +136,16 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
 
       {/* Learning Objectives */}
       <div className="bg-green-50 rounded-2xl p-8 border-2 border-green-500">
-        <h2 className="text-4xl font-bold text-green-900 mb-6 flex items-center gap-3">
-          <span>🎯</span> What You'll Learn Today!
-        </h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-4xl font-bold text-green-900 flex items-center gap-3">
+            <span>🎯</span> What You'll Learn Today!
+          </h2>
+          <ReadAloud 
+            text={`What you'll learn today: ${lesson.objectives.join('. ')}`}
+            iconSize="lg"
+            showLabel
+          />
+        </div>
         <div className="space-y-3">
           {lesson.objectives.map((obj, index) => (
             <div key={index} className="flex items-start gap-3">
@@ -182,9 +204,15 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
               key={index} 
               className={`rounded-2xl p-8 border-2 ${bgColors[block.type]}`}
             >
-              <div className="flex items-start gap-3">
-                <span className="text-5xl">{block.emoji || titleEmojis[block.type]}</span>
-                <p className="text-2xl leading-relaxed text-gray-800">{block.text}</p>
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex items-start gap-3 flex-grow">
+                  <span className="text-5xl">{block.emoji || titleEmojis[block.type]}</span>
+                  <p className="text-2xl leading-relaxed text-gray-800">{block.text}</p>
+                </div>
+                <ReadAloud 
+                  text={block.text}
+                  iconSize="md"
+                />
               </div>
             </div>
           )
@@ -196,12 +224,25 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         <h2 className="text-4xl font-bold text-gray-900">🎨 Fun Activities!</h2>
         {lesson.activities.map((activity, index) => (
           <div key={index} className="bg-gradient-to-br from-orange-50 to-pink-50 rounded-2xl p-8 border-2 border-orange-300 shadow-lg">
-            <h3 className="text-3xl font-bold text-orange-900 mb-4">{activity.title}</h3>
+            <div className="flex items-start justify-between gap-3 mb-4">
+              <h3 className="text-3xl font-bold text-orange-900">{activity.title}</h3>
+              <ReadAloud 
+                text={`Activity: ${activity.title}. ${activity.description}. ${activity.whatYoullDiscover}`}
+                iconSize="lg"
+                showLabel
+              />
+            </div>
             <p className="text-xl text-gray-700 mb-6 italic">{activity.description}</p>
             
             {/* Materials */}
             <div className="mb-6">
-              <h4 className="text-2xl font-bold text-orange-800 mb-3">📦 What You'll Need:</h4>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-2xl font-bold text-orange-800">📦 What You'll Need:</h4>
+                <ReadAloud 
+                  text={`What you'll need: ${activity.materials.join(', ')}`}
+                  iconSize="md"
+                />
+              </div>
               <ul className="space-y-2">
                 {activity.materials.map((material, idx) => (
                   <li key={idx} className="flex items-center gap-3 text-xl text-gray-800">
@@ -215,9 +256,15 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
             {/* Safety Notes */}
             {activity.safetyNotes && activity.safetyNotes.length > 0 && (
               <div className="mb-6 bg-red-100 border-2 border-red-400 rounded-xl p-4">
-                <h4 className="text-2xl font-bold text-red-800 mb-3 flex items-center gap-2">
-                  <span>⚠️</span> Safety First!
-                </h4>
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="text-2xl font-bold text-red-800 flex items-center gap-2">
+                    <span>⚠️</span> Safety First!
+                  </h4>
+                  <ReadAloud 
+                    text={`Safety first! ${activity.safetyNotes.join('. ')}`}
+                    iconSize="md"
+                  />
+                </div>
                 <ul className="space-y-2">
                   {activity.safetyNotes.map((note, idx) => (
                     <li key={idx} className="text-lg text-red-900">• {note}</li>
@@ -228,7 +275,13 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
 
             {/* Steps */}
             <div className="mb-6">
-              <h4 className="text-2xl font-bold text-orange-800 mb-3">📝 Step-by-Step:</h4>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-2xl font-bold text-orange-800">📝 Step-by-Step:</h4>
+                <ReadAloud 
+                  text={`Step by step: ${activity.steps.map((step, i) => `Step ${i + 1}: ${step}`).join('. ')}`}
+                  iconSize="md"
+                />
+              </div>
               <ol className="space-y-4">
                 {activity.steps.map((step, idx) => (
                   <li key={idx} className="flex gap-4">
@@ -284,9 +337,16 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
 
       {/* Review Questions - Interactive! */}
       <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 border-2 border-purple-300">
-        <h2 className="text-4xl font-bold text-purple-900 mb-6 flex items-center gap-3">
-          <span>🧠</span> Check What You Learned!
-        </h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-4xl font-bold text-purple-900 flex items-center gap-3">
+            <span>🧠</span> Check What You Learned!
+          </h2>
+          <ReadAloud 
+            text={`Check what you learned! ${lesson.reviewQuestions.map((q, i) => `Question ${i + 1}: ${q.question}`).join('. ')}`}
+            iconSize="lg"
+            showLabel
+          />
+        </div>
         <p className="text-xl text-gray-700 mb-6">Click on the answer you think is right!</p>
         
         <div className="space-y-6">
@@ -297,6 +357,10 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
                 <p className="text-2xl font-bold text-gray-900 flex-grow">
                   {qIndex + 1}. {q.question}
                 </p>
+                <ReadAloud 
+                  text={`Question ${qIndex + 1}: ${q.question}. Your options are: ${q.options.join(', ')}`}
+                  iconSize="md"
+                />
               </div>
               <div className="grid gap-3">
                 {q.options.map((option, oIndex) => (
@@ -324,14 +388,26 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         <h2 className="text-4xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
           <span>🙏</span> Prayer Time
         </h2>
-        <p className="text-2xl text-gray-800 italic leading-relaxed max-w-3xl mx-auto">
-          {lesson.prayerPrompt}
-        </p>
+        <div className="flex items-start justify-center gap-4">
+          <p className="text-2xl text-gray-800 italic leading-relaxed max-w-3xl">
+            {lesson.prayerPrompt}
+          </p>
+          <ReadAloud 
+            text={`Prayer time: ${lesson.prayerPrompt}`}
+            iconSize="lg"
+          />
+        </div>
       </div>
 
       {/* Oklahoma Standards */}
       <div className="bg-green-50 rounded-2xl p-6 border-2 border-green-500">
-        <h3 className="text-2xl font-bold text-green-900 mb-3">✓ Oklahoma Science Standards</h3>
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-2xl font-bold text-green-900">✓ Oklahoma Science Standards</h3>
+          <ReadAloud 
+            text={`This lesson covers Oklahoma Science Standards: ${lesson.oklahomaStandards.join(', ')}`}
+            iconSize="md"
+          />
+        </div>
         <div className="flex flex-wrap gap-3">
           {lesson.oklahomaStandards.map((standard, index) => (
             <span 

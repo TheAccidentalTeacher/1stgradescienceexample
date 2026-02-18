@@ -20,6 +20,25 @@
 - Hands-on activities to channel energy
 - Frequent breaks and movement opportunities
 - Connect all topics to Bobby's interests when possible
+- **🔊 Text-to-speech throughout** - Complete audio accessibility for non-readers and ELL students
+
+---
+
+## 🔊 Accessibility Features
+
+**For Non-Readers & English Language Learners:**
+
+This curriculum includes comprehensive **text-to-speech** capabilities, allowing students to access all content through audio:
+
+- **Speaker buttons** 🔊 throughout every lesson (scripture, objectives, activities, review questions, etc.)
+- **Auto-speaking vocabulary cards** - Click any word to hear it spoken with definition
+- **Global accessibility panel** - Adjust reading speed (Slow/Normal/Fast) for different learning needs
+- **Kid-friendly voices** - Optimized speech settings for 7-year-olds
+- **100% independent learning** - Students can complete entire lessons without reading
+
+**Result**: Bobby (or any student) can learn completely on their own, whether they can read or not! 📚➡️🔊
+
+For detailed documentation, see [ACCESSIBILITY.md](./ACCESSIBILITY.md)
 
 ---
 
