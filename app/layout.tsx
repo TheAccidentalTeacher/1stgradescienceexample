@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import AccessibilityPanel from '@/components/AccessibilityPanel'
+import QuickVoicePicker from '@/components/QuickVoicePicker'
 
 export const metadata: Metadata = {
   title: "Bobby's Science Adventure",
@@ -21,13 +22,14 @@ export default function RootLayout({
             <a href="/" className="text-3xl font-bold hover:text-yellow-300 transition-colors">
               🦕 Bobby&apos;s Science Adventure 🚜
             </a>
-            <div className="flex gap-4">
+            <div className="flex items-center gap-4">
               <a href="/" className="text-xl hover:text-yellow-300 transition-colors">
                 Home
               </a>
               <a href="/units" className="text-xl hover:text-yellow-300 transition-colors">
                 Units
               </a>
+              <QuickVoicePicker />
             </div>
           </div>
         </nav>

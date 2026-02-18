@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { BookOpen, Microscope, Globe, Wrench, Sparkles } from 'lucide-react'
+import VoiceSelector from '@/components/VoiceSelector'
 
 const units = [
   {
@@ -94,6 +95,9 @@ export default function Home() {
           <span className="bounce-on-hover cursor-pointer">🐛</span>
         </div>
       </div>
+
+      {/* Voice Selector - Choose Your Reading Voice! */}
+      <VoiceSelector />
 
       {/* Quick Stats */}
       <div className="grid md:grid-cols-4 gap-6">
